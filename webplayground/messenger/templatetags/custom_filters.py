@@ -1,21 +1,26 @@
 from django import template
 from django.utils.timesince import timesince
-from django.utils.translation import gettext
 
 register = template.Library()
 
+# 0 minutos -> primera vez
+# 1 minutos -> siempre
+
 @register.filter
-def timesince_es(value):
-    result = timesince(value)
+def replace_minutes(timesince_last_message):
+    minutes = ' '.join(timesince_last_message.split()[-2:])  # supuestamente
+    leftover = ' '.join(timesince_last_message.split()[:-2])
 
-    # Modificación a unos segundos
-    if '0' in result or '0 minutos' in result:
-        return gettext('unos segundos')
-    # Corrección de pluralización para '1 minutos'
-    elif '1' in result or '1 minutos' in result:
-        return gettext('1 minuto')
+    if minutes == '0 minutes':
+        return "unos segundos"
+    elif minutes == '1 minutos':
+        return leftover + '1 minuto'
 
-    # Traducción de 'minutes' a 'minutos'
-    result = result.replace('minutes', gettext('minutos'))
+    timesince_last_message = timesince_last_message.replace('minutes', 'minutos')
 
-    return result
+    # extra
+    last_comma_index = timesince_last_message.rfind(',')
+    if last_comma_index >= 0:
+        timesince_last_message = timesince_last_message[:last_comma_index] + ' y' + timesince_last_message[last_comma_index + 1:]
+
+    return timesince_last_message

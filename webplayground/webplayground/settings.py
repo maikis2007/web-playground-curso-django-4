@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+#import locale
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #'django.contrib.humanize',
     'ckeditor',
     'core',
     'messenger',
@@ -52,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.middleware.locale.LocaleMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -107,11 +110,18 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'es'
+# LANGUAGES = [
+#     ('es', 'Español'),
+#     ('es-pe', 'Español (Perú)'),
+# ]
+
+LANGUAGE_CODE = 'es-pe'
+
+#locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
+#locale.setlocale(locale.LC_TIME, 'es_PE.utf8')
 
 # TIME_ZONE = 'America/Lima'
 TIME_ZONE = 'UTC'
@@ -126,7 +136,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -147,4 +157,9 @@ else:
 
 # Media
 MEDIA_URL = '/media/'
-MEDIA_ROOT = '/home/maikito/Cursos/CursosDj/webplayground/media'
+# MEDIA_ROOT = '/home/maikito/Cursos/CursosDj/web-playground-curso-django-4/webplayground/media'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# LOCALE_PATHS = [
+#     BASE_DIR / 'messenger/locale',
+# ]
