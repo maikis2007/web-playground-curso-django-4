@@ -18,7 +18,7 @@
                 {# for user in thread.users.all #}
                   {# if user != request.user #}
                     {# if user.profile.avatar #}
-                      <img src="{{ user.profile.avatar.url }}" class="avatar">
+                      <img src="{# user.profile.avatar.url #}" class="avatar">
                     {# else #}
                       <img src="{# static 'registration/img/no-avatar.jpg' #}" class="avatar">
                     {# endif #}

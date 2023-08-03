@@ -6,12 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 from django.views.generic.detail import DetailView
 from .models import Thread, Message, User
-from django.utils.translation import gettext as _
-from django.utils.translation import ngettext
-from django.utils.timesince import timesince
 from django.utils.timezone import now
-import humanize
-from django.conf import settings
 
 # Create your views here.
 

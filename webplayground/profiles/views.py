@@ -10,6 +10,12 @@ class ProfileListView(ListView):
     template_name = 'profiles/profile_list.html'
     paginate_by = 6
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        if self.request.user.is_authenticated:
+            queryset = queryset.exclude(user=self.request.user)
+        return queryset
+
 class ProfileDetailView(DetailView):
     model = Profile
     template_name = 'profiles/profile_detail.html'
